@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% load custom %}    <!--载入自定义模版文件-->
+
+{% block content-left %}
+
+   <div class="blog-head">
+     <h3>{{ article.title }} </h3>
+     <div class="blog-summary-btn">
+
+        <!--<a>{{ article.author.name }} |   </a> {{article.author.name|test_tag}}|{ % test_tag2 article.author.name %}>-->
+        <a>{{ article.author.name }} |   </a>
+        <span>{{ article.publish_date }}</span>
+        <span><i class="fa fa-comment-o"></i>{{ article.comment_set.select_related.count }}</span>
+        <span><i class="fa fa-star"></i>{{ article.thumbup_set.select_related.count }}</span>
+
+
+     </div>
+    <div class="blog-content">
+     {{ article.content|safe }}
+
+    </div>
+
+    <div class="comments-box">
+        {% build_comment_tree comments %}
+
+
+
+
+
+    </div>
+   </div>
+
+
+{% endblock %}
+
+{% block content-right %}
+    right bar
+{% endblock %}
